@@ -11,18 +11,11 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"	
-	_ "reflect"
-	_ "regexp"
-	_ "strconv"
-	_ "sort"
 	"strings"
 )
 
-type ip_int interface {}
-
 func init(){
-	//clone()
-	//ip_maps, ip_ranges := ListIPs()
+	clone()
 }
 
 func main() {
@@ -67,7 +60,6 @@ func ListIPs() (map[uint32]uint32, []ip_range_int){
 		
 		scanner := bufio.NewScanner(file)
 		for scanner.Scan() {
-			//ipToInt(regEx.FindString(sanner.Text()))
 			line := scanner.Text()
 			switch {
 				case string(line[0]) == "#": {
@@ -87,14 +79,11 @@ func ListIPs() (map[uint32]uint32, []ip_range_int){
 				}
 				default: {
 					ip_val := ipToInt(line)
-					//ip_val_string := strconv.FormatUint(uint64(ip_val), 10)
-					//ips = append(ips,ip_val)
 					ip_maps[ip_val] = ip_val
 				}
 			}
 		}
 	}
-	//sort.Slice(ips, func(i, j int) bool { return ips[i] < ips[j] })
 	return ip_maps, ip_ranges
 }
 
@@ -150,7 +139,6 @@ func intToIP (ip uint32) (int,error){
 	a := make([]byte, 4)
 	binary.LittleEndian.PutUint32(a, ip)
 	return fmt.Println(a[3],".",a[2],".",a[1],".",a[0])
-	//fmt.Printf("%d.%d.%d.%d\n", a[3], a[2], a[1], a[0])
 }
 
 func check_lists(ip_ranges []ip_range_int, ip_maps map[uint32]uint32, ip string) (int,error){
