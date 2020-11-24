@@ -151,7 +151,7 @@ func check_lists(ip_ranges []ip_range_int, ip_maps map[uint32]uint32, ip string)
 			if err != nil {fmt.Println("error converting check.low to subnet")}
 			high_ip,  err := intToIP(check.high)
 			if err != nil {fmt.Println("error converting check.high to subnet")}
-			fmt.Println("low:" , low_ip, "high:", high_ip)
+			//fmt.Println("low:" , low_ip, "high:", high_ip)
 			return fmt.Println("blocked ip in ranges:", check, "ip:", ip_int)
 		} else {
 			if ip_maps[ip_int] == ip_int {
